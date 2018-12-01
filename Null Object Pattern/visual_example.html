@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <title>Null Object</title>
+</head>
+<body class="container">
+  <br>
+  <label>Select a User</label>
+  <select id="user-select" class="form-control">
+    <option></option>
+    <option>Bob</option>
+    <option>Joe</option>
+  </select>
+  <br>
+  <button id="loginBtn" role="button" class="btn btn-primary">Log In</button>
+  <div id="content"></div>
+  <script>
+    class User {
+      constructor(name) {
+        this.name = name
+      }
+
+      hasAccess() {
+        return true
+      }
+    }
+
+    class NullUser {
+      constructor() {
+        this.name = 'Guest'
+      }
+
+      hasAccess() {
+        return false
+      }
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', loginClick)
+
+    function loginClick() {
+      let name = document.getElementById('user-select').value
+      if (name === '') name = null
+      loginUser(getUser(name))
+    }
+
+    // Call this function to render the welcome code on the screen on load
+    loginClick();
+
+
+
+
+
+
+    function getUser(name) {
+      if (name == null) {
+        return new NullUser()
+      } else {
+        return new User(name)
+      }
+    }
+
+    function loginUser(user) {
+      let content = `<p class="text-danger">You must be logged in to view this</p>`
+      if (user.hasAccess()) {
+        content = `<p>Congrats you are logged in</p>`
+      }
+      document.getElementById('content').innerHTML =
+        `
+          <hr>
+          <h3 class="text-center">Welcome ${user.name}</h3>
+          ${content}
+        `
+    }
+  </script>
+</body>
+</html>
