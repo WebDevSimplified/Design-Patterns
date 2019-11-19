@@ -12,10 +12,10 @@ class Calculator {
   }
 
   multiply(valueToMultiply) {
-    this.value = this.value + valueToMultiply
+    this.value = this.value * valueToMultiply
   }
 
   divide(valueToDivide) {
-    this.value = this.value + valueToDivide
+    this.value = this.value / valueToDivide
   }
 }
