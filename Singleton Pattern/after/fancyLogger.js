@@ -1,6 +1,6 @@
 class FancyLogger {
   constructor() {
-    if (FancyLogger.instance == null) {
+    if (FancyLogger.instance == undefined) {
       this.logs = []
       FancyLogger.instance = this
     }
